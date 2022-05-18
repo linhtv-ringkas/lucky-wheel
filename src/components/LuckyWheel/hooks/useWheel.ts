@@ -3,7 +3,8 @@ import { useEffect, useRef } from "react";
 
 function getTanFromDegrees(degrees: number) {
   return Math.tan(degrees * Math.PI / 180);
-}const useWheel = (listReward: any[] = []) => {
+}
+const useWheel = (listReward: any[] = []) => {
   const wheelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -30,8 +31,8 @@ function getTanFromDegrees(degrees: number) {
         divEle.style.borderTopColor = "#"+ randomColor;
         divEle.style.left = `${radius - x}px`;
         // divEle.style.left = `0`;
-        // divEle.style.transform=`rotate(${360/listReward.length*index}deg)`
-        wheelRef.current?.appendChild(divEle);
+        divEle.style.transform=`rotate(${360/listReward.length*index}deg)`
+        index === 5 && wheelRef.current?.appendChild(divEle);
       });
     }
   }, [listReward]);
