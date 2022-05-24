@@ -7,14 +7,17 @@ const useWheel = (listReward: PrizeItem[] = [], wheel?: any, config?: any) => {
   const {onSpinStarted, onSpinEnded} = config || {};
   const wheelRef = useRef<HTMLDivElement>(wheel?.wheelRef.current || null);
   const resizeRef = useResizeObserver<HTMLDivElement>({ref: wheelRef});
-  const spin = () => {
-    if (onSpinStarted && typeof onSpinStarted === 'function') {
-      onSpinStarted()
-    }
-    console.log("quay số nè", wrapWheel.wheelRef.current);
-    if (onSpinEnded && typeof onSpinEnded === 'function') {
-      onSpinEnded()
-    }
+  const spin = (prizeId?: string, round?: number) => {
+      if (onSpinStarted && typeof onSpinStarted === 'function') {
+        onSpinStarted()
+      }
+      console.log("quay số nè", wrapWheel.wheelRef.current);
+      if(prizeId) {
+
+      }
+      if (onSpinEnded && typeof onSpinEnded === 'function') {
+        onSpinEnded()
+      }
   }
   const wrapWheel = useMemo(() => {
     const {width, height} = resizeRef;
