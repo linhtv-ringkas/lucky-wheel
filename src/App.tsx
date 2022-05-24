@@ -1,14 +1,16 @@
 import styles from "./App.module.scss";
-import { ReactNode, useEffect } from "react";
+import { useEffect } from "react";
 import LuckyWheel from "./components/LuckyWheel";
 import PrizeItem from "./components/LuckyWheel/Models/PrizeItem";
+import useWheelInstant from "./components/LuckyWheel/hooks/useWheelInstant";
+
 function App() {
 
-  const prizes: PrizeItem[]=[
+  const prizes: PrizeItem[] = [
     {
       prizeRender: <div className={styles.prizeItem}>1</div>,
       id: "1",
-      background: "red",
+      background: "linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%)",
     },
     {
       prizeRender: <div className={styles.prizeItem}>2</div>,
@@ -23,7 +25,7 @@ function App() {
     {
       prizeRender: <div className={styles.prizeItem}>4</div>,
       id: "4",
-      background: "pink",
+      background: "linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%)",
     },
     {
       prizeRender: <div className={styles.prizeItem}>5</div>,
@@ -36,9 +38,20 @@ function App() {
       background: "green",
     },
   ]
+  const [wheel] = useWheelInstant(prizes);
+  useEffect(() => {
+    setTimeout(() => {
+      wheel.spin();
+    }, 2000)
+  }, [])
   return (
     <div className={styles.App}>
-      <LuckyWheel prizes={prizes} />
+      <LuckyWheel
+        onSpinStarted={() => console.log("started")}
+        onSpinEnded={() => console.log("ended")}
+        wheel={wheel}
+        prizes={prizes}
+      />
     </div>
   );
 }
